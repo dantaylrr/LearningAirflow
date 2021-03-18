@@ -48,7 +48,7 @@ with DAG('user_processing', schedule_interval='@daily',
         task_id='creating_table',
         sqlite_conn_id='db_sqlite',
         sql='''
-            CREATE TABLE users (
+            CREATE TABLE IF NOT EXISTS users (
                 firstname TEXT NOT NULL,
                 last   name TEXT NOT NULL,
                 country TEXT NOT NULL,
@@ -94,3 +94,7 @@ with DAG('user_processing', schedule_interval='@daily',
 
 # bash command... specify comma(,) separator (it's a .csv file), then import the .csv into table 'users'
 # then specify the airflow db
+
+# define our dependencies, or the order in which to execute the tasks
+
+    creating_table >> is_api_available >> extracting_user >> processing_user >> storing_user
