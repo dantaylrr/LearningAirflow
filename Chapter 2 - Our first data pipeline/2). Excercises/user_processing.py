@@ -1,5 +1,7 @@
 # recall, all of this is done inside a vm - so is for my own reference
 
+# file name is user_processing for ref.
+
 from airflow.models import DAG # always done
 from airflow.providers.sqlite.operators.sqlite import SqliteOperator
 from airflow.providers.http.sensors.http import HttpSensor
